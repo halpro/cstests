@@ -17,6 +17,7 @@
 #include <vector>
 #include <utility>
 using namespace std;
+
 //! Definition for singly-linked list.
 struct ListNode {
     int val;
@@ -30,13 +31,14 @@ inline void deleteList(ListNode*);
 //! Reverse string in place and return it
 //! https://leetcode.com/problems/reverse-string/description/
 string reverseString(const string & s) {
-    //fast option 2N memory:
+    //faster option with 2N memory:
     string result;
     for (int i = s.length()-1; i>=0; --i) 
         result.push_back(s[i]);
 
     return result;
 }
+//! Reverse string in place - O(n) time and O(1) space
 void reverseStringInPlace(string & s) {
     //slow option:
     int strLen = s.length();
@@ -218,6 +220,15 @@ bool hasPalindromePermutation(const string& str)
     // has one or zero characters without a pair
     return unpairedCharacters.size() <= 1;
 }
+//! Two Sum
+//! https://leetcode.com/problems/two-sum/description/
+/*Given an array of integers, return indices of the two numbers such that they add up to a specific target.
+You may assume that each input would have exactly one solution, and you may not use the same element twice.
+Example:
+Given nums = [2, 7, 11, 15], target = 9,
+Because nums[0] + nums[1] = 2 + 7 = 9,
+return [0, 1].
+*/
 class TwoSumSolution{
     public:
         vector<int> twoSumV1(vector<int>& nums, int target)
@@ -251,16 +262,8 @@ class TwoSumSolution{
             throw invalid_argument("No two sum solution");
         }
 };
-//! Two Sum
-//! https://leetcode.com/problems/two-sum/description/
-/*Given an array of integers, return indices of the two numbers such that they add up to a specific target.
-You may assume that each input would have exactly one solution, and you may not use the same element twice.
-Example:
-Given nums = [2, 7, 11, 15], target = 9,
-Because nums[0] + nums[1] = 2 + 7 = 9,
-return [0, 1].
-*/
-void findIndicesOfTwoSum(){
+//! Test function for https://leetcode.com/problems/two-sum/description/
+void testFindIndicesOfTwoSum(){
     TwoSumSolution twoSum;
     vector<int> nums = {3,3,1};
     cout << "[";
@@ -284,7 +287,7 @@ void findIndicesOfTwoSum(){
 //vector<vector<int>> threeSum(vector<int>& nums)
 
 //! Test all my leetcode algorithms
-void leetcodeTest() {
+void testLeetcode() {
     //***********************************************************************************
     //1. reverse string in place
     string str = "abcdef";
@@ -377,8 +380,8 @@ void leetcodeTest() {
     string strPermute {"sarar"};
     cout << "6. Can " << strPermute << " permute as a palindrome? ";
     cout << (hasPalindromePermutation(strPermute)?"... YES! this can permute as a palindrome":" ... cannot make a palindrome.") << endl;
-    cout << "7. Return indices of the two numbers such that they add up to a specific target: ";
-    findIndicesOfTwoSum();
+    cout << "7. Return indices of two numbers such that they add up to a specific target: ";
+    testFindIndicesOfTwoSum();
 }
 
 //! Memory cleanup

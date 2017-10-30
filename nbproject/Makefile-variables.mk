@@ -9,19 +9,19 @@ CND_DISTDIR=dist
 # Debug configuration
 CND_PLATFORM_Debug=GNU-Linux
 CND_ARTIFACT_DIR_Debug=dist/Debug/GNU-Linux
-CND_ARTIFACT_NAME_Debug=cpptests
-CND_ARTIFACT_PATH_Debug=dist/Debug/GNU-Linux/cpptests
+CND_ARTIFACT_NAME_Debug=cstests
+CND_ARTIFACT_PATH_Debug=dist/Debug/GNU-Linux/cstests
 CND_PACKAGE_DIR_Debug=dist/Debug/GNU-Linux/package
-CND_PACKAGE_NAME_Debug=cpptests.tar
-CND_PACKAGE_PATH_Debug=dist/Debug/GNU-Linux/package/cpptests.tar
+CND_PACKAGE_NAME_Debug=cstests.tar
+CND_PACKAGE_PATH_Debug=dist/Debug/GNU-Linux/package/cstests.tar
 # Release configuration
 CND_PLATFORM_Release=GNU-Linux
 CND_ARTIFACT_DIR_Release=dist/Release/GNU-Linux
-CND_ARTIFACT_NAME_Release=cpptests
-CND_ARTIFACT_PATH_Release=dist/Release/GNU-Linux/cpptests
+CND_ARTIFACT_NAME_Release=cstests
+CND_ARTIFACT_PATH_Release=dist/Release/GNU-Linux/cstests
 CND_PACKAGE_DIR_Release=dist/Release/GNU-Linux/package
-CND_PACKAGE_NAME_Release=cpptests.tar
-CND_PACKAGE_PATH_Release=dist/Release/GNU-Linux/package/cpptests.tar
+CND_PACKAGE_NAME_Release=cstests.tar
+CND_PACKAGE_PATH_Release=dist/Release/GNU-Linux/package/cstests.tar
 #
 # include compiler specific variables
 #

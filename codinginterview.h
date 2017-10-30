@@ -7,10 +7,7 @@
 
 #ifndef CODINGINTERVIEW_H
 #define CODINGINTERVIEW_H
-
-
 //! Calculate factorial with O(n) runtime
-
 int factorial(int n) {
     if (n < 0)
         return -1;
@@ -19,18 +16,14 @@ int factorial(int n) {
     else
         return n * factorial(n - 1);
 }
-
-string stringPermutation(const string & str) {
-
-}
-
+//! Test function
 void testCodingInterview() {
     cout << "Cracking coding interview tasks..." << endl;
     int intN = 10;
     cout << "1. factorial(" << intN << ") = ";
     cout << factorial(intN) << endl;
 }
-void interviewcake()
+void testInterviewcake()
 {
     
 }
