@@ -32,7 +32,7 @@ void testCodingInterview() {
 }
 void interviewcake()
 {
-    //cout << "Interviewcake..." << endl;
+    
 }
 
 #endif /* CODINGINTERVIEW_H */

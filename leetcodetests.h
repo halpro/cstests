@@ -1,5 +1,5 @@
 /* 
- * File:   easyTests.h
+ * File:   leetcodetests.h
  * Author: alec
  *
  * Created on October 25, 2017, 2:53 PM
@@ -199,11 +199,6 @@ bool isPalindrome(ListNode* head) {
     deleteList(newHeadRight);
     return result;
 }
-//! Given an array S of n integers, are there elements a, b, c in S such that a + b + c = 0? Find all unique 
-//! triplets in the array which gives the sum of zero.
-//! https://leetcode.com/problems/3sum/description/
-//vector<vector<int>> threeSum(vector<int>& nums) 
-
 //! Can the string permute to a palindrome?
 bool hasPalindromePermutation(const string& str)
 {
@@ -260,14 +255,10 @@ class TwoSumSolution{
 //! https://leetcode.com/problems/two-sum/description/
 /*Given an array of integers, return indices of the two numbers such that they add up to a specific target.
 You may assume that each input would have exactly one solution, and you may not use the same element twice.
-
 Example:
-
 Given nums = [2, 7, 11, 15], target = 9,
-
 Because nums[0] + nums[1] = 2 + 7 = 9,
 return [0, 1].
-
 */
 void findIndicesOfTwoSum(){
     TwoSumSolution twoSum;
@@ -286,6 +277,11 @@ void findIndicesOfTwoSum(){
         cout << i << " " ;
     cout << "]" << endl;
 }
+//! Given an array S of n integers, are there elements a, b, c in S such that a + b + c = 0? Find all unique 
+//! triplets in the array which gives the sum of zero.
+//! https://leetcode.com/problems/3sum/description/
+//TODO: write a solution
+//vector<vector<int>> threeSum(vector<int>& nums)
 
 //! Test all my leetcode algorithms
 void leetcodeTest() {

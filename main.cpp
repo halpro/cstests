@@ -5,8 +5,6 @@
  * Created on October 25, 2017, 11:47 AM
  */
 
-
-#include <iostream>
 #include "leetcodetests.h"
 #include "codinginterview.h"
 
