@@ -26,7 +26,7 @@ struct ListNode {
     ListNode(int x) : val(x), next(NULL) {
     }
 };
-inline void deleteList(ListNode*);
+template <typename T> inline void deleteList(T*);
 //! Easy
 //! Reverse string in place and return it
 //! https://leetcode.com/problems/reverse-string/description/
@@ -83,13 +83,13 @@ int romanToInt(const string & s) {
 //! Medium. You are given two non-empty linked lists representing two non-negative integers. The digits are stored in reverse order
 //! and each of their nodes contain a single digit. Add the two numbers and return it as a linked list.
 //! https://leetcode.com/problems/add-two-numbers/description/
-ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
+template <typename T> T* addTwoNumbers(T* l1, T* l2) {
     //O(n) running time
-    ListNode* node1 = l1;
-    ListNode* node2 = l2;
-    ListNode* resultHeadNode = new ListNode(0);
-    ListNode* prevNode = resultHeadNode;
-    ListNode* currentNode = resultHeadNode;
+    T* node1 = l1;
+    T* node2 = l2;
+    T* resultHeadNode = new T(0);
+    T* prevNode = resultHeadNode;
+    T* currentNode = resultHeadNode;
     int intRegister, intNextOrder = 0;
     bool bContinue;
 
@@ -114,7 +114,7 @@ ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
 
         if (bContinue) {
             prevNode = currentNode;
-            currentNode = new ListNode(0);
+            currentNode = new T(0);
             prevNode->next = currentNode;
             currentNode->next = NULL;
         }
@@ -125,11 +125,11 @@ ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
 //! Easy
 //! Reverse single linked list
 //! https://leetcode.com/problems/reverse-linked-list/description/
-ListNode* reverseList(ListNode* head) {
+template <typename T> T* reverseList(T* head) {
     //O(n) running time
-    ListNode* current = head;
-    ListNode* prevNode = NULL;
-    ListNode* nextNode;
+    T* current = head;
+    T* prevNode = NULL;
+    T* nextNode;
 
     while (current) {
         nextNode = current->next;
@@ -143,7 +143,7 @@ ListNode* reverseList(ListNode* head) {
 //! Easy
 //! Given a singly linked list, determine if it is a palindrome.
 //! https://leetcode.com/problems/palindrome-linked-list/description/
-bool isPalindrome(ListNode* head) {
+template <typename T> bool isPalindrome(T* head) {
     //O(n) running time and O(1) space
     //We will make a copy of the list and then break the list in two parts then reverse *left* part and compare left and right.
     //Edge cases:
@@ -156,7 +156,7 @@ bool isPalindrome(ListNode* head) {
     ListNode* prevNode = NULL;
     ListNode* newHeadLeft = NULL;
     ListNode* newHeadRight = NULL;
-    ListNode* localHead = new ListNode(head->val);
+    ListNode* localHead = new T(head->val);
     prevNode = localHead;
     //1. count all nodes
     while (current->next) {
@@ -201,25 +201,6 @@ bool isPalindrome(ListNode* head) {
     deleteList(newHeadRight);
     return result;
 }
-//! Can the string permute to a palindrome?
-bool hasPalindromePermutation(const string& str)
-{
-    // track characters we've seen an odd number of times
-    unordered_set<char> unpairedCharacters;
-
-    for (char c : str) {
-        if (unpairedCharacters.find(c) != unpairedCharacters.end()) {
-            unpairedCharacters.erase(c);
-        }
-        else {
-            unpairedCharacters.insert(c);
-        }
-    }
-
-    // the string has a palindrome permutation if it
-    // has one or zero characters without a pair
-    return unpairedCharacters.size() <= 1;
-}
 //! Two Sum
 //! https://leetcode.com/problems/two-sum/description/
 /*Given an array of integers, return indices of the two numbers such that they add up to a specific target.
@@ -231,31 +212,31 @@ return [0, 1].
 */
 class TwoSumSolution{
     public:
-        vector<int> twoSumV1(vector<int>& nums, int target)
+        template <typename T> vector<T> twoSumV1(vector<T>& nums, T target)
         {
             for (auto i: nums) {
-                for (int j = i + 1; j < nums.size(); j++) {
+                for (T j = i + 1; j < nums.size(); j++) {
                     if (nums[j] == target - nums[i]) {
-                        return vector<int> { i, j };
+                        return vector<T> { i, j };
                     }
                 }
             }
             throw invalid_argument("No two sum solution");
         }
         //! 
-        vector<int> twoSumV2(vector<int>& nums, int target)
+        template <typename T> vector<T> twoSumV2(vector<T>& nums, T target)
         {
-            map<int,int> hashTable;
+            map<T,T> hashTable;
             int idx = 0;
 
             for (auto i: nums) {
                 auto complement = target - i;//get diff value: 6-3
                 
                 if (hashTable.count(complement)) {
-                    return vector<int> { hashTable.at(complement), idx };
+                    return vector<T> { hashTable.at(complement), idx };
                 }
                 //hashTable.insert(make_pair<int,int>((int)nums[idx],(int)idx));
-                hashTable.insert(make_pair<int,int>((int)i,(int)idx));
+                hashTable.insert(make_pair<T,T>((T)i,(T)idx));
                 ++idx;
             }
             
@@ -274,11 +255,16 @@ void testFindIndicesOfTwoSum(){
     cout << " target number = " << target ;
     
     //vector<int> sums = twoSum.twoSumV1(nums, target);
-    vector<int> sums = twoSum.twoSumV2(nums, target);
+    vector<int> sums = twoSum.twoSumV2<int>(nums, target);
     cout << " found two indices: [";
     for(auto i : sums)
         cout << i << " " ;
     cout << "]" << endl;
+}
+//! https://leetcode.com/problems/permutation-in-string/description/
+// Given a collection of distinct numbers, return all possible permutations. 
+template <typename T> vector<vector<T>> permute(vector<T>& nums) {
+        
 }
 //! Given an array S of n integers, are there elements a, b, c in S such that a + b + c = 0? Find all unique 
 //! triplets in the array which gives the sum of zero.
@@ -288,6 +274,7 @@ void testFindIndicesOfTwoSum(){
 
 //! Test all my leetcode algorithms
 void testLeetcode() {
+    cout << "Leetcode.com algirithm tasks:" << endl;
     //***********************************************************************************
     //1. reverse string in place
     string str = "abcdef";
@@ -321,7 +308,7 @@ void testLeetcode() {
     newNode->next = NULL;
     //***********************************************************************************
     cout << "3. Add two numbers (342 and 465) that were put by digits into two sigle linked lists in reverse order: 2->4->3 and 5->6->4. ";
-    currentNode = addTwoNumbers(node1, node2);
+    currentNode = addTwoNumbers<ListNode>(node1, node2);
     newNode = currentNode;
     string strSum = "", strDigit = "";
 
@@ -334,9 +321,9 @@ void testLeetcode() {
     strDigit = std::to_string(currentNode->val);
     strSum.insert(0, strDigit);
     cout << "The sum is: " << strSum << endl;
-    deleteList(node1);
-    deleteList(node2);
-    deleteList(currentNode);
+    deleteList<ListNode>(node1);
+    deleteList<ListNode>(node2);
+    deleteList<ListNode>(currentNode);
     //***********************************************************************************
     cout << "4. Reverse linked list ";
     ListNode* nodeToReverse = new ListNode(1); //1->2->3 list revert to 3->2->1
@@ -355,7 +342,7 @@ void testLeetcode() {
     }
     
     cout << "NULL] ... reversed to [";
-    currentNode = reverseList(nodeToReverse);
+    currentNode = reverseList<ListNode>(nodeToReverse);
     nodeToReverse = currentNode;
     
     while (currentNode) {
@@ -364,29 +351,27 @@ void testLeetcode() {
     }
     
     cout << "NULL] " << endl;
-    deleteList(nodeToReverse);
+    deleteList<ListNode>(nodeToReverse);
     //***********************************************************************************
     cout << "5. Determine the linked list 9->1->5->1->9 is a palindrome number:";
-    node1 = new ListNode(9); currentNode = node1;
+    node1   = new ListNode(9); currentNode = node1;
     newNode = new ListNode(1); currentNode->next = newNode; currentNode = newNode;
     newNode = new ListNode(5); currentNode->next = newNode; currentNode = newNode;
     newNode = new ListNode(1); currentNode->next = newNode; currentNode = newNode;
     newNode = new ListNode(9); currentNode->next = newNode; newNode->next = NULL;
     
-    bool bIsPalindrome = isPalindrome(node1);
+    bool bIsPalindrome = isPalindrome<ListNode>(node1);
     cout << (bIsPalindrome ? " is a PALINDROME! " : " is not a palindrome.") << endl;
-    deleteList(node1);
+    deleteList<ListNode>(node1);
     
-    string strPermute {"sarar"};
-    cout << "6. Can " << strPermute << " permute as a palindrome? ";
-    cout << (hasPalindromePermutation(strPermute)?"... YES! this can permute as a palindrome":" ... cannot make a palindrome.") << endl;
-    cout << "7. Return indices of two numbers such that they add up to a specific target: ";
+    cout << "6. Return indices of two numbers such that they add up to a specific target: ";
     testFindIndicesOfTwoSum();
+    
 }
 
 //! Memory cleanup
-inline void deleteList(ListNode* node) {
-    ListNode* nextNode;
+template <typename T> inline void deleteList(T* node) {
+    T* nextNode;
     while (node->next) {
         nextNode = node->next;
         delete node;
