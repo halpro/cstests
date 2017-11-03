@@ -26,6 +26,7 @@ struct ListNode {
     ListNode(int x) : val(x), next(NULL) {
     }
 };
+template <typename T, typename V> inline T* addNextNode(T* node, V value);
 template <typename T> inline void deleteList(T*);
 //! Easy
 //! Reverse string in place and return it
@@ -197,8 +198,8 @@ template <typename T> bool isPalindrome(T* head) {
         current = current->next;
     }
 
-    deleteList(newHeadLeft);
-    deleteList(newHeadRight);
+    deleteList<ListNode>(newHeadLeft);
+    deleteList<ListNode>(newHeadRight);
     return result;
 }
 //! Two Sum
@@ -291,21 +292,13 @@ void testLeetcode() {
     ListNode* newNode;
     ListNode* currentNode = node1;
 
-    newNode = new ListNode(4);
-    currentNode->next = newNode;
-    currentNode = newNode;
-    newNode = new ListNode(3);
-    currentNode->next = newNode;
-    newNode->next = NULL;
+    newNode = node1;
+    newNode = addNextNode<ListNode, int>(newNode, 4);
+    newNode = addNextNode<ListNode, int>(newNode, 3);
 
-    currentNode = node2;
-    newNode = new ListNode(6);
-    currentNode->next = newNode;
-    currentNode = newNode;
-    newNode = new ListNode(4);
-    currentNode->next = newNode;
-    currentNode = newNode;
-    newNode->next = NULL;
+    newNode = node2;
+    newNode = addNextNode<ListNode, int>(newNode, 6);
+    newNode = addNextNode<ListNode, int>(newNode, 4);
     //***********************************************************************************
     cout << "3. Add two numbers (342 and 465) that were put by digits into two sigle linked lists in reverse order: 2->4->3 and 5->6->4. ";
     currentNode = addTwoNumbers<ListNode>(node1, node2);
@@ -327,12 +320,9 @@ void testLeetcode() {
     //***********************************************************************************
     cout << "4. Reverse linked list ";
     ListNode* nodeToReverse = new ListNode(1); //1->2->3 list revert to 3->2->1
-    newNode = new ListNode(2);
-    currentNode->next = newNode;
-    currentNode = newNode;
-    newNode = new ListNode(3);
-    currentNode->next = newNode;
-    currentNode = newNode;
+    newNode = nodeToReverse;
+    newNode = addNextNode<ListNode, int>(newNode, 2);
+    newNode = addNextNode<ListNode, int>(newNode, 3);
     currentNode = nodeToReverse;
     cout << "[";
 
@@ -355,10 +345,10 @@ void testLeetcode() {
     //***********************************************************************************
     cout << "5. Determine the linked list 9->1->5->1->9 is a palindrome number:";
     node1   = new ListNode(9); currentNode = node1;
-    newNode = new ListNode(1); currentNode->next = newNode; currentNode = newNode;
-    newNode = new ListNode(5); currentNode->next = newNode; currentNode = newNode;
-    newNode = new ListNode(1); currentNode->next = newNode; currentNode = newNode;
-    newNode = new ListNode(9); currentNode->next = newNode; newNode->next = NULL;
+    currentNode = addNextNode<ListNode, int>(currentNode, 1);
+    currentNode = addNextNode<ListNode, int>(currentNode, 5);
+    currentNode = addNextNode<ListNode, int>(currentNode, 1);
+    currentNode = addNextNode<ListNode, int>(currentNode, 9);
     
     bool bIsPalindrome = isPalindrome<ListNode>(node1);
     cout << (bIsPalindrome ? " is a PALINDROME! " : " is not a palindrome.") << endl;
@@ -368,8 +358,15 @@ void testLeetcode() {
     testFindIndicesOfTwoSum();
     
 }
-
-//! Memory cleanup
+//! Template to create and add next node with the value
+template <typename T, typename V> inline T* addNextNode(T* node, V value)
+{
+    T* newNode = new T(value);
+    node->next = newNode;
+    newNode->next = NULL;
+    return newNode;
+}
+//! Memory cleanup: delete entire linked list
 template <typename T> inline void deleteList(T* node) {
     T* nextNode;
     while (node->next) {
